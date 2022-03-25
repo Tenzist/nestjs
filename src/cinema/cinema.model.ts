@@ -1,11 +1,12 @@
-import { Table, Model, Column, DataType } from "sequelize-typescript";
+import { Table, Model, Column, DataType, BelongsToMany, BelongsTo } from "sequelize-typescript";
+import { Halls } from "../halls/halls.model";
 
 interface CinemaCreationAttr{
-  id: number;
-  name: string
+  name: string;
+  address: string;
 }
 
-@Table
+@Table({createdAt: false, updatedAt: false})
 export class Cinema extends Model<Cinema, CinemaCreationAttr>{
   @Column({type: DataType.INTEGER, primaryKey: true, unique: true, autoIncrement: true})
   id: number;
@@ -13,4 +14,5 @@ export class Cinema extends Model<Cinema, CinemaCreationAttr>{
   name: string;
   @Column({type: DataType.STRING, unique: true, allowNull: false})
   address: string;
+
 }

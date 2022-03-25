@@ -9,10 +9,13 @@ export class CinemaService {
   constructor(@InjectModel(Cinema) private  cinemaRep: typeof Cinema) {
   }
 
-  async createCinema(dto: CinemaDto){
+  async create(dto: CinemaDto){
     return this.cinemaRep.create(dto)
   }
   async getAll(){
     return this.cinemaRep.findAll()
+  }
+  async getByName(name: string){
+    return this.cinemaRep.findOne({where: {name}})
   }
 }
