@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { HallsService } from "./halls.service";
 import { HallsDto } from "./dto/halls.dto";
 
@@ -18,4 +18,8 @@ export class HallsController {
   getWorking(){
       return this.hallServise.getWorking();
     }
+  @Get('/:id')
+  getByYear(@Param('id')id: number){
+    return this.hallServise.getById(id);
+  }
 }

@@ -14,8 +14,8 @@ constructor(private cinemaServise: CinemaService) {}
   getAll(){
     return this.cinemaServise.getAll();
   }
-  @Get('/:name')
-  getByName(@Param('name')name: string){
-  return this.cinemaServise.getByName(name)
+  @Get('/:id')
+  getByName(@Param('id')id: string){
+  return this.cinemaServise.getByName(id)
   }
 }

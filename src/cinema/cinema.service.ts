@@ -15,7 +15,7 @@ export class CinemaService {
   async getAll(){
     return this.cinemaRep.findAll()
   }
-  async getByName(name: string){
-    return this.cinemaRep.findOne({where: {name}})
+  async getByName(id: string){
+    return this.cinemaRep.findOne({where: {id}})
   }
 }

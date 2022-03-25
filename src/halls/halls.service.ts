@@ -17,4 +17,7 @@ export class HallsService {
   async getWorking(){
     return this.hallsRep.findAll({where: {isWorking: true}})
   }
+  async  getById(id: number){
+    return await this.hallsRep.findAll({ where:{id} });
+  }
 }

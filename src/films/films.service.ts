@@ -13,7 +13,7 @@ export class FilmsService {
   async getAll(){
     return this.filmRep.findAll()
   }
-  async getByYear(year: number){
-    return await this.filmRep.findAll({ where:{year} });
+  async getByYear(id: number){
+    return await this.filmRep.findByPk(id);
   }
 }

@@ -7,6 +7,7 @@ export class Session extends Model<Session>{
 
   @Column({type: DataType.INTEGER, primaryKey: true, unique: true, autoIncrement: true})
   id: number;
+
   @ForeignKey(() => Film)
   @Column({type: DataType.INTEGER})
   filmId: number;

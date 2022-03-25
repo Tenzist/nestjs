@@ -15,9 +15,11 @@ export class FilmsController {
   getAll(){
     return this.filmsService.getAll();
   }
-  @Get('/:year')
-  getByYear(@Param('year')year: number){
-    return this.filmsService.getByYear(year);
+  @Get('/:id')
+  async getByYear(@Param('id')id: number){
+    let message = await this.filmsService.getByYear(id);
+    console.log(message.halls);
+    return this.filmsService.getByYear(id);
   }
 }
 
