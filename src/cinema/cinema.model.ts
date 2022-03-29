@@ -1,5 +1,8 @@
-import { Table, Model, Column, DataType, BelongsToMany, BelongsTo } from "sequelize-typescript";
+import { Table, Model, Column, DataType, BelongsToMany, HasMany } from "sequelize-typescript";
+import { Film } from "../films/films.model";
+import { Session } from "../sessions/session.model";
 import { Halls } from "../halls/halls.model";
+import { ManyToOne, OneToMany } from "typeorm";
 
 interface CinemaCreationAttr{
   name: string;
@@ -15,4 +18,6 @@ export class Cinema extends Model<Cinema, CinemaCreationAttr>{
   @Column({type: DataType.STRING, unique: true, allowNull: false})
   address: string;
 
+  @HasMany(() => Halls)
+  halls: Halls[];
 }

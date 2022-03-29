@@ -5,6 +5,7 @@ import { FilmsController } from "./films.controller";
 import { FilmsService } from "./films.service";
 import { Halls } from "../halls/halls.model";
 import { Session } from "../sessions/session.model";
+import { HallsModule } from "../halls/halls.module";
 
 @Module({
   controllers: [FilmsController],

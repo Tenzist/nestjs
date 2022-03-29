@@ -14,6 +14,7 @@ import { Cinema } from "../cinema/cinema.model";
   imports: [
     SequelizeModule.forFeature([Halls, Cinema,  Film, Session])
   ],
+  exports: [HallsService]
 })
 
 export class HallsModule {}

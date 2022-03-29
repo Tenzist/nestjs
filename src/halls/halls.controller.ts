@@ -10,16 +10,25 @@ export class HallsController {
   create(@Body() hall: HallsDto){
     return this.hallServise.create(hall);
   }
+  @Get()
+  getAllHalls() {
+    return this.hallServise.getAllHalls();
+  }
   @Get('/all')
   getAll() {
     return this.hallServise.getAll();
   }
-  @Get()
-  getWorking(){
-      return this.hallServise.getWorking();
-    }
+  @Get('/sessions-count')
+  async getTop() {
+    return this.hallServise.getHallSessionsCount();
+  }
+  @Get('/:id/session')
+  async getHallSessions(@Param('id')id: number){
+    return this.hallServise.getHallSessions(id);
+  }
   @Get('/:id')
-  getByYear(@Param('id')id: number){
+  async getById(@Param('id')id: number){
     return this.hallServise.getById(id);
   }
+
 }

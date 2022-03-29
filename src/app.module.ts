@@ -5,9 +5,9 @@ import { Cinema } from "./cinema/cinema.model";
 import { ConfigModule } from "@nestjs/config";
 import { FilmsModule } from "./films/films.module";
 import { Film } from "./films/films.model";
-import { Halls } from "./halls/halls.model";
 import { HallsModule } from "./halls/halls.module";
 import { Session } from "./sessions/session.model";
+import { Halls } from "./halls/halls.model";
 
 @Module({
   controllers: [],

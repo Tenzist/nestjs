@@ -11,15 +11,21 @@ export class FilmsController {
   create(@Body() dto: FilmsDto){
     return this.filmsService.create(dto);
   }
-  @Get()
+  @Get('/all')
   getAll(){
     return this.filmsService.getAll();
   }
+  @Get()
+  getAllFilms(){
+    return this.filmsService.getAllFilms();
+  }
+  @Get('/top')
+  getTop() {
+    return this.filmsService.getTop();
+  }
   @Get('/:id')
-  async getByYear(@Param('id')id: number){
-    let message = await this.filmsService.getByYear(id);
-    console.log(message.halls);
-    return this.filmsService.getByYear(id);
+  async getById(@Param('id')id: number){
+    return this.filmsService.getById(id);
   }
 }
 

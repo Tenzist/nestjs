@@ -1,7 +1,8 @@
-import { Table, Model, Column, DataType, BelongsToMany } from "sequelize-typescript";
+import { Table, Model, Column, DataType, BelongsToMany, HasMany } from "sequelize-typescript";
 import { Cinema } from "../cinema/cinema.model";
 import { Session } from "../sessions/session.model";
 import { Halls } from "../halls/halls.model";
+import { JoinTable, ManyToMany } from "typeorm";
 
 interface FilmsCreationAttr{
   name: string;
@@ -16,6 +17,9 @@ export class Film extends Model<Film, FilmsCreationAttr>{
   name: string;
   @Column({type: DataType.INTEGER, allowNull: false})
   year: number;
+
+  @HasMany(() => Session)
+  session: Session[];
 
   @BelongsToMany(() => Halls, () => Session)
   halls: Halls[];
