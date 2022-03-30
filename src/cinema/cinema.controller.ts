@@ -5,8 +5,7 @@ import { HallsService } from "../halls/halls.service";
 
 @Controller('cinema')
 export class CinemaController {
-constructor(private cinemaServise: CinemaService,
-            private  hallServise: HallsService) {}
+constructor(private cinemaServise: CinemaService) {}
 
   @Post()
   create(@Body() cinema: CinemaDto){

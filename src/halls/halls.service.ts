@@ -15,16 +15,19 @@ export class HallsService {
   constructor(@InjectModel(Halls) private hallsRep: typeof Halls) {}
 
   async create(dto: HallsDto){
-    return this.hallsRep.create(dto);
+    return await this.hallsRep.create(dto);
   }
   async getAllHalls(){
-    return this.hallsRep.findAll()
+    return await this.hallsRep.findAll({ order:['id'] })
   }
   async getAll(){
-  return this.hallsRep.findAll({include: {all: true}})
+  return await this.hallsRep.findAll({include: {all: true}})
 }
-  async getWorking(){
-    return this.hallsRep.findAll({where: {isWorking: true}})
+  // async getWorking(status: boolean){
+  //   return await this.hallsRep.findOne({where: {isWorking: status}})
+  // }
+  async getFreeHall(){
+    return await this.hallsRep.findOne({where: {cinemaID: null}})
   }
   async getHallSessionsCount(){
     let hallSessions = [];
@@ -32,7 +35,6 @@ export class HallsService {
     let count;
     for (let a = 1; a <= hallAmount; a++) {
       count = await Session.count({ where: { hallsId: a } });
-
       hallSessions.push(await this.hallsRep.findByPk(a, {
         attributes: [['id', 'Hall ID'],
           [sequelize.literal(count),'sessions']]

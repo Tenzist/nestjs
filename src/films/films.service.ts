@@ -24,32 +24,27 @@ export class FilmsService {
   }
   async getTop(){
     let filmRating = [];
-
     const hallAmount = await this.filmRep.count()
-    let count;
-    let arr = [];
     for (let a = 1; a <= hallAmount; a++) {
-      count = await Session.count({ where: { filmId: a } });
-      arr.push(count);
+      const count = await Session.count({ where: { filmId: a } });
       filmRating.push(await this.filmRep.findByPk(a, {
         attributes: ['name','year',
-          [sequelize.literal(count),'sessions'],
+          [sequelize.literal(String(count)),'session'],
         ]
       }))
     }
-    console.log(arr);
-    arr.sort();
-    console.log(arr);
-    // console.log(filmRating);
-    filmRating.sort(function(a,b){
-      if(a.year > b.year){
-        return 1;
-      }
-      if(a.year < b.year){
-        return -1;
-      }
-      return 0
-    })
+
+    // filmRating.sort(function(a,b){
+    //   if(a.number > b.number){
+    //     return 1;
+    //   }
+    //   if(a.number < b.number){
+    //     return -1;
+    //   }
+    //   return 0
+    // })
+
+
     // console.log(filmRating);
     return filmRating;
 
