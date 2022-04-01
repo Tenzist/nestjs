@@ -9,7 +9,6 @@ constructor(private cinemaServise: CinemaService) {}
 
   @Post()
   create(@Body() cinema: CinemaDto){
-
     return this.cinemaServise.create(cinema);
   }
   @Get('/all')

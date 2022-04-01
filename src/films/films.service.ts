@@ -7,6 +7,8 @@ import { Session } from "../sessions/session.model";
 import sequelize, { where } from "sequelize";
 import { HallsService } from "../halls/halls.service";
 import { getPriority } from "os";
+import { getValueOfPath } from "@nestjs/cli/lib/compiler/helpers/get-value-or-default";
+import { log } from "util";
 
 @Injectable()
 export class FilmsService {
@@ -22,33 +24,35 @@ export class FilmsService {
   async getAllFilms(){
     return this.filmRep.findAll()
   }
-  async getTop(){
+  async getTop(query){
     let filmRating = [];
     const hallAmount = await this.filmRep.count()
     for (let a = 1; a <= hallAmount; a++) {
       const count = await Session.count({ where: { filmId: a } });
       filmRating.push(await this.filmRep.findByPk(a, {
-        attributes: ['name','year',
+        attributes: ['name',
           [sequelize.literal(String(count)),'session'],
         ]
       }))
     }
+    filmRating.sort(function(a,b){
+      const {dataValues: first} = a;
+      const {dataValues: second} = b;
 
-    // filmRating.sort(function(a,b){
-    //   if(a.number > b.number){
-    //     return 1;
-    //   }
-    //   if(a.number < b.number){
-    //     return -1;
-    //   }
-    //   return 0
-    // })
+      if(first.session < second.session){
+        return 1;
+      }
+      if(first.session > second.session){
+        return -1;
+      }
+      return 0
+    })
+    if(query.sort == 123){
+      filmRating.reverse();
+    }
 
 
-    // console.log(filmRating);
     return filmRating;
-
-
   }
 
   async getById(id: number){
