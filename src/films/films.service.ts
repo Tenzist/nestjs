@@ -5,22 +5,37 @@ import { FilmsDto } from "./dto/films.dto";
 import { Halls } from "../halls/halls.model";
 import { Session } from "../sessions/session.model";
 import sequelize, { where } from "sequelize";
-import { HallsService } from "../halls/halls.service";
-import { getPriority } from "os";
-import { getValueOfPath } from "@nestjs/cli/lib/compiler/helpers/get-value-or-default";
-import { log } from "util";
+import fs from "fs";
 
 @Injectable()
 export class FilmsService {
   constructor(@InjectModel(Film) private filmRep: typeof Film) {}
 
   async create(dto: FilmsDto){
+    const fs = require('fs')
+    fs.readFile('./src/films/test.json', 'utf8' , (err, data) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      console.log(data)
+    })
     const film = await this.filmRep.create(dto);
     return film;
   }
+
   async getAll(){
+    // const fs = require('fs')
+    // fs.readFile('./src/films/test.json', 'utf8' , (err, data) => {
+    //   if (err) {
+    //     console.error(err)
+    //     return
+    //   }
+    //   console.log(data)
+    // })
     return this.filmRep.findAll({include: {all: true}})
   }
+
   async getAllFilms(){
     return this.filmRep.findAll()
   }
@@ -47,10 +62,9 @@ export class FilmsService {
       }
       return 0
     })
-    if(query.sort == 123){
+    if(query.sort == "asc"){
       filmRating.reverse();
     }
-
 
     return filmRating;
   }

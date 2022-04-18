@@ -12,19 +12,23 @@ describe('FilmController', () => {
       filmsController = new FilmsController(filmsService);
     });
 
-    describe('getAll', () => {
+    describe('getAllFilms', () => {
       it('should return an array of all films', async () => {
         const result = [];
-        jest.spyOn(filmsService, 'getAll').mockImplementation(async () => result);
-
-        expect(await filmsController.getAll()).toBe(result);
+        jest.spyOn(filmsService, 'getAllFilms').mockImplementation(async () => result);
+        expect(await filmsController.getAllFilms()).toBe(result);
       });
 
       describe('FilmsController', () =>{
-        it('should call create once', async () => {
-
+        it('should return top film', async () => {
+          const result = [];
+          jest.spyOn(filmsService, 'getTop').mockImplementation(async () => result);
+          expect(await filmsController.getTop(321)).toBe(result);
         })
       })
+
+
+
       // it('should return string', async () => {
       //   expect('aaa' ).toBe('aaa');
       // })
